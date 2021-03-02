@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.theme
+package com.example.androiddevchallenge
 
-import androidx.compose.material.Colors
+import androidx.activity.OnBackPressedDispatcher
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.runtime.CompositionLocalProvider
+import com.example.androiddevchallenge.ui.NavGraph
+import com.example.androiddevchallenge.ui.utils.LocalBackDispatcher
+import com.example.androiddevchallenge.ui.utils.ProvideImageLoader
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
-/**
- * Return the fully opaque color that results from compositing [onSurface] atop [surface] with the
- * given [alpha]. Useful for situations where semi-transparent colors are undesirable.
- */
 @Composable
-fun Colors.compositedOnSurface(alpha: Float): Color {
-    return onSurface.copy(alpha = alpha).compositeOver(surface)
+fun BunnyApp(backDispatcher: OnBackPressedDispatcher) {
+    CompositionLocalProvider(LocalBackDispatcher provides backDispatcher) {
+        ProvideWindowInsets {
+            ProvideImageLoader {
+                NavGraph()
+            }
+        }
+    }
 }
-
-val purple200 = Color(0xFFBB86FC)
-val purple500 = Color(0xFF6200EE)
-val purple700 = Color(0xFF3700B3)
-val teal200 = Color(0xFF03DAC5)
